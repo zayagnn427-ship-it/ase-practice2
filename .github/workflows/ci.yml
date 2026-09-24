@@ -63,5 +63,9 @@ jobs:
         with:
           file_path: artifact/similarity/build/distributions/similarity.tar
           extract_dir: dist
-      - name: Test Similarity
+      - name: Test Similarity (Unix)
+        if: ${{ runner.os != 'Windows' }}
         run: scripts/e2e-integration-test.sh
+      - name: Test Similarity (Windows)
+        if: ${{ runner.os == 'Windows' }}
+        run: ./scripts/e2e-integration-test.ps1
